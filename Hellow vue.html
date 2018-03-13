@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+
+</head>
+<body>
+    <div id="app">
+        <P v-bind:title="message">{{text}}</P>
+    </div>
+    <script src="vue.js"></script>
+    <script>
+         var app=new Vue({
+            el:"#app",
+            data:{
+                text:"Hello Word",
+                message:"你好，Vue.js",
+            }
+         });
+    </script>
+</body>
+</html>

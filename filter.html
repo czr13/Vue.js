@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <!--
+        vue提供过滤器：
+            capitalize  uppercase currency
+
+            debounce  配合事件，延迟执行
+        数据配合使用过滤器
+            limitBy 限制几个
+            limitBy 参数(取几个)
+            limitby 取几个  从哪开始
+
+            filterBy 过滤数据
+            filterBy "谁"
+
+            orderBy  排序
+            orderBy 1/-1
+                    1 ->正序
+                    -1->倒序
+    ---------------------------------
+
+    自定义过滤器
+
+
+    -->
+    <div id="box">
+        {{'ccc'}}
+    </div>
+    <script>
+        var vm=new Vue({
+                data:{
+                    a:9
+                },
+                method:{
+
+                }
+        }).$mount("#box")
+    </script>
+</body>
+</html>
