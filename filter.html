@@ -25,19 +25,24 @@
                     -1->倒序
     ---------------------------------
 
-    自定义过滤器
+    自定义过滤器：model ->过滤 ->view
+        Vue.filter(name,function(){
 
+        })
 
     -->
+    <!--实现的效果是都是两位数字-->
     <div id="box">
-        {{'ccc'}}
+        {{a | toDou}}<!--如果过滤器后面有参数的话，也是一样的，也可以在自定义的过滤器中传入参数-->
     </div>
     <script>
+        Vue.filter("toDou",function(input){//这里的参数input就是a
+            return input<10?'0'+input:""+input;
+        })
         var vm=new Vue({
                 data:{
                     a:9
-                },
-                method:{
+                }
 
                 }
         }).$mount("#box")
