@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>全局组件 </title>
+    <script src="vue.js"></script>
+</head>
+<body>
+ <div id="box">
+     <aa></aa>
+ </div>
+ <script>
+     var Aaa=Vue.extend({
+        data(){/* *组件里面放数据：
+                    data必须是函数的形式，函数必须返回一个对象{json}*/
+            return {
+                msg:"我是组件"
+            }
+        },
+        template:'<h3>{{msg}}</h3>',
+     })
+     Vue.component('aa',Aaa)
+     new Vue({
+        el:"#box",
+        data:{
+
+        }
+     })
+
+     <!--局部组件：就是放到某个组件内部-->
+     /*
+
+     new Vue({
+        el:"#box",
+        data:{
+        },
+        components:{//局部组件
+           aaa:Aaa
+        }
+     })
+      */
+ </script>
+</body>
+</html>

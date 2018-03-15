@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <script src="vue.js"></script>
+    <script>
+        Vue.directive('red',function(){
+            this.el.style.background="red";
+        });
+        window.onload=function(){
+            var vm=new Vue({
+                el:'#box',
+                data:{
+                    msg:"welcome"
+                }
+            });
+        };
+    </script>
+
+</head>
+<body>
+    <div id="box">
+        <span v-red>
+            ccc
+        </span>
+    </div>
+
+</body>
+</html>

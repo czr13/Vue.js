@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <!--
+        vue组件：
+            组件：一个大对象
+        定义一个组件：
+        1.Vue.extend({
+            template:""//template放的是你想替换成什么就放什么
+        })
+        Vue.component('aaa',Aaa);第一个参数是原来的数，第二是要替换成的
+    -->
+    <div id="box">
+        <aaa></aaa>
+    </div>
+    <script>
+      var Aaa=Vue.extend({
+        template:"<h3>eegege</h3>",
+      });
+
+      Vue.component('aaa',Aaa);
+
+      new Vue({
+        el:"#box",
+
+      })
+    </script>
+</body>
+</html>
