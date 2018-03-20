@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="box">
+        <aaa></aaa>
+    </div>
+    <template id="CC">
+        <div>
+            <h1>我是父组件-->{{mag}}</h1>
+            <input type="button" name="" value="父组件的按钮">
+            <bbb @child-mag="get"></bbb>
+
+        </div>
+
+    </template>
+    <template id="bbb">
+        <div>
+           <h1> 我是子组件</h1>
+           <input type="button" name="" value="子组件的按钮send" @click="send()">
+        </div>
+    </template>
+    <script>
+
+        new Vue({
+            el:"#box",
+            data:{
+                a:"aaa"
+            },
+            components:{
+                "aaa":{
+                    data(){
+                        return {
+                            mag:"我是父组件的数据",
+                            two:"我是你组件的第二个数据"
+                        }
+                    },
+                    methods:{
+                        get(mag){
+                            //alert(mag)
+                            this.mag=mag
+                        }
+                    },
+                    template:"#CC",
+                    components:{
+                        "bbb":{
+                            data(){
+                                return {
+                                    mess:"子组件的数据"
+                                }
+                            },
+                             props:['m','aTher'],
+                            template:'#bbb',
+                            methods:{
+                                send(){
+                                    this.$emit('child-mag',this.mess)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>

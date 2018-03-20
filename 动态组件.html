@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+<div id="box">
+    <input type="button" name="" value="我是aa" @click="a='aaa'">
+    <input type="button" name="" value="我是BB" @click="a='bb'">
+    <component :is="a"></component>
+    <aaa></aaa>
+</div>
+
+    <script src="vue.js"></script>
+    <script>
+        new Vue({
+            el:"#box",
+            data:{
+                a:'aaa'
+            },
+            components:{
+                'aaa':{
+                    template:'<h2>我是aaa</h2>'
+                },
+                'bb':{
+                    template:'<h2>我是bbb</h2>'
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>

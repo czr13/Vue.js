@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="box">
+        <aaa></aaa>
+    </div>
+    <template id="CC">
+        <h1>我是父组件-->{{mag}}<br>
+            <bbb :m="mag" :a-ther="two"></bbb>
+        </h1>
+
+    </template>
+    <script>
+
+        new Vue({
+            el:"#box",
+            data:{
+                a:"aaa"
+            },
+            components:{
+                "aaa":{
+                    data(){
+                        return {
+                            mag:"我是父组件的数据",
+                            two:"我是你组件的第二个数据"
+                        }
+                    },
+                    template:"#CC",<!--默认情况下子组件无法获取父组件的数据-->
+                    components:{
+                        "bbb":{
+                             /*props:{
+                                "m":String,
+                             },可以这样写*/
+                             <!--也可以这样写-->
+                             props:['m','aTher'],<!--通过props解决获取父组件的数据，采用驼锋命名法-->
+                            template:'<h3>我是子组件bbb-->{{m}}<br>{{aTher}}</h3>'
+                        }
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>

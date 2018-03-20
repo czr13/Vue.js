@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>全局组件 </title>
+    <script src="vue.js"></script>
+</head>
+<body>
+ <div id="box">
+     <aa></aa>
+ </div>
+ <script>
+
+     /*全局的
+     Vue.component('aa',{
+        template:'<strong>eege</strong>'
+     })
+      */
+     new Vue({
+        el:"#box",
+        data:{
+
+        },
+        components:{
+            'aa':{
+                data(){
+                     return{
+                        msg:'welcome vue'
+                     }
+                },
+                methods:{
+                    change(){
+                        this.msg="哈哈 这个时候我改变了"
+                    }
+                },
+
+                template:'<h2 @click="change">{{msg}}</h2>'/* 局部的 */
+            }
+        }
+     })
+
+
+ </script>
+</body>
+</html>
