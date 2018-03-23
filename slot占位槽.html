@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <aaa>
+            <ul>
+                <li>degeg</li><!--默认情况下如果aaa里面有内容，会被盖住，slot的作用使其不覆盖，如果aaa里面没有内容，那么显示的则是slot里面的值-->
+                <li>333</li>
+            </ul>
+        </aaa>
+    </div>
+    <template id="my">
+        <div id="wrap">
+            <h4>我是第一个</h4>
+            <slot>我是用来占位置的</slot>
+            <h3>我是第三个</h3>
+        </div>
+    </template>
+</body>
+<script>
+    new Vue({
+        el:"#app",
+        components:{
+            "aaa":{
+                template:"#my"
+            }
+        }
+    })
+</script>
+</html>

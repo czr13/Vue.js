@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <aaa>
+            <ul slot="ul-slot">
+                <li>degeg</li>
+                <li>333</li>
+            </ul>
+            <ol slot="ol-slot">
+                <li>1111</li>
+                <li>222</li>
+                <li>333</li>
+                <li>444</li>
+            </ol>
+        </aaa>
+    </div>
+    <template id="my">
+        <div id="wrap">
+            <h4>我是第一个</h4>
+            <slot name="ol-slot">我是用来占位置的</slot><!--可以添加对应的名称-->
+            <slot name="ul-slot">我是用来占位置的</slot><!--多个slot-->
+            <h3>我是第三个</h3>
+        </div>
+    </template>
+</body>
+<script>
+    new Vue({
+        el:"#app",
+        components:{
+            "aaa":{
+                template:"#my"
+            }
+        }
+    })
+</script>
+</html>
