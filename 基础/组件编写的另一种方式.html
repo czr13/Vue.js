@@ -2,23 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <title>组件配合模版 </title>
-    <script src="vue.js"></script>
+    <title>全局组件 </title>
+    <script src="../vue.js"></script>
 </head>
 <body>
  <div id="box">
      <aa></aa>
  </div>
- <template id="aaa">
-     <ul>
-        <h2>标题1</h2>
-         <li v-for="str in arr">
-             {{str}}
-         </li>
-     </ul>
-
- </template>
  <script>
+
+     /*全局的
+     Vue.component('aa',{
+        template:'<strong>eege</strong>'
+     })
+      */
      new Vue({
         el:"#box",
         data:{
@@ -28,8 +25,7 @@
             'aa':{
                 data(){
                      return{
-                        msg:'welcome vue',
-                        arr:[2,4,5]
+                        msg:'welcome vue'
                      }
                 },
                 methods:{
@@ -38,7 +34,7 @@
                     }
                 },
 
-                template:"#aaa"
+                template:'<h2 @click="change">{{msg}}</h2>'/* 局部的 */
             }
         }
      })
