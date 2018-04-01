@@ -1,4 +1,29 @@
-    一个Vue实例必须与一个页面元素绑定，Vue实例一般用作Vue的全局配置来使用，例如向实例安装路由、资源插件、配置应用于全局的自定义过滤器、自定义指令等，
+   我们需要知道的是，通过import将一个vue.js的组件文件引入，并创建一个vue对象的实例，在vue实例中用render方法来绘制这个vue组件(app)就完成了初始化，
+
+
+vue-cli本身集成很多项目模版
+ 1，webpack    ----Eslint检查代码规范，元测试（大型项目）
+ 2，webpack-simple   --最常用
+ 3，simple ---没太大用
+
+
+基本使用流程
+
+1，npm install vue-cli -g   --安装
+
+   验证是否安装好:vue --version
+
+2,vue init <模版名> 本地文件夹名称     --生成项目模版
+
+3.cd 目录名	进入生成目录里面
+   
+   npm install	--安装目录里面的文件
+
+4，npm run dev  启动
+
+
+
+ 一个Vue实例必须与一个页面元素绑定，Vue实例一般用作Vue的全局配置来使用，例如向实例安装路由、资源插件、配置应用于全局的自定义过滤器、自定义指令等，
     *.vue是Vue.js特有的文件格式，表示的就是一个Vue组件，它也是Vue.js的最大特色，被称为单页式组件。*vue文件可以同时承载“视图模版”，“样式定义”和组件代码，它使得组件的文件组织更加清晰与统一。
   脚手架为我们创建的这个App组件内加入了不少介绍性的文字，将这个文件“净化”后就可以得到一个最简单的Vue组件定义模版
 
@@ -21,3 +46,88 @@ export default{
  3，<script>——组件定义
 
 在Vue实例内的其他地方可以直接用this引用data内定义的任何属性，比如this.title就是引用了data.title
+
+
+数据绑定：
+
+<template>
+    <div id="app">
+        <h1>{{title}}</h1>
+        <ul>
+            <li v-for="(todo,index) in todos" :id="index">//如果index=1,那么输出结果就是id=1,如果没有在id前面加上“：”，那么vue就会认为我们正在为id属性赋予一个字符串
+                <label>{{todo.value}}.{{index}}</label>
+            </li>
+        </ul>
+    </div>
+
+</template>
+
+
+<script>
+
+    /* 首先，在组件脚本定义中使用data定义用于内部访问的数据模型 */
+    /* data可以是一个返回Object对象的函数，也可以是一个对象属性，也就是说，可以写成以下的方式  */
+    /*export default{
+        ...
+        data:{
+        title:"vue-todos"
+        }
+    } */
+     export default{
+        name:'app',
+        data () {
+         return {
+            title:"vue-todos",
+            todos:[
+                {value:"阅读一本关于前端开发的书",done:false},
+                {value:"补充范例代码",done:true},
+                {value:"写心得",done:false},
+            ]
+         }
+        }
+     }
+
+</script>
+<style>
+</style>
+
+
+首先，在vue的代码中直接操作dom是不被推荐的，其次，dom是被vue直接托管的，所有“绑定”到dom上的变量一旦发生变化，dom所对应的属性就会被vue自动重绘而不需要像jquery那样通过编码来显式地操作，这才是绑定的意义所在
+
+
+样式绑定：
+	
+  因为纯css的代码量很大，而且需要不断地重复，所以使用less,以下是webpack支持less编译的包的方法
+
+  npm i less style-loader css-loader less-loader -D
+
+安装完成后在webpack.config.js的modules设置内加入以下的配置：
+
+	module:{
+	   rules:[
+		//..省略
+		{
+		   test:/\.less$/,
+		   loader:"style!css!less"
+		}
+	      ]
+	}
+
+在/assets/中添加一个todos.less文件，并在App.vue的组件定义内引入less样式表：
+
+	import './assets/todos.less'
+        
+	export default{
+                   //...省略
+	}
+
+
+使用import将样式表直接导入到代码的效果是：webpack的less-loader会生成一些代码，在页面运行的时候将编译后的less代码生成到<style>标签内并自动插入到页面的<head>中，有一点要注意的是，这种做法是全局的，在后面介绍部分时会有多个组件页面加载到同一个页上，如果使用import导入样式的话，样式就会长期驻留页面直至Vue的根(root)实例被销毁
+
+通过import将样式文件导入是一种全局性的做法，也就是说，在每一个页面内的<head>中都会有这一个样式表，这样做的缺点是很容易导致样式冲突，如果希望样式表仅应用于当前组件，可以使用<style scoped>,然后用CSS的@import导入样式表
+
+<style scoped>
+   @import './assets/todos.less'
+</style>
+
+无论绑定的是样式类还是样式属性，:class和:style表达式内一定是一个JSON对象

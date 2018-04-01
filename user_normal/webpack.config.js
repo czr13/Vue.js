@@ -37,6 +37,10 @@ module.exports = {
           name: '[name].[ext]?[hash]'
         }
       }
+      {
+        test:/\.less$/,
+        loader:"style!css!less"
+      }
     ]
   },
   resolve: {
