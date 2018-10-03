@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>todolist</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="text" name="" v-model="inputValue">
+        <input type="button" name="" value="提交" @click="handleClickInput">
+        <ul>
+            <todo-item
+                v-for='(list,index) in item'
+                :content="list"
+                :index="index"
+                @delete="handlelistdelete"></todo-item><!-- 父组件 刚好在监听子组件触发的事件-->
+        </ul>
+    </div>
+    <script>
+        Vue.component("TodoItem",{
+            props:['content','index'],//子组件接收父组件的内容
+            template:"<li @click='handlelistclick'>{{content}}</li>",
+            methods:{
+                handlelistclick:function(){
+                    this.$emit('delete',this.index)//通过$emit向父组件触发事件
+                }
+            }
+
+
+        })
+        var app=new Vue({
+            el:"#app",
+            data:{
+                item:[],
+                inputValue:""
+            },
+            methods:{
+                handleClickInput:function(){
+                    this.item.push(this.inputValue),//将input里面的内容添加到数组里面
+                    this.inputValue=""//清空input里面的内容
+
+                },
+                handlelistdelete:function(index){
+                     this.item.splice(index,1)
+                }
+            }
+        })
+    </script>
+</body>
+</html>

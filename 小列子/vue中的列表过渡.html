@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>vue中的列表过渡</title>
+    <script src="../vue.js"></script>
+    <style type="text/css">
+       .fade-enter,.v-leave-to{
+            opacity:0;
+        }
+        .fade-enter-active,.v-leave-active{
+            transition:opacity 3s;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <transition-group name='fade'>
+        <!-- 的使用transiton-group的时候:key必须等于其循环的数组 -->
+            <div v-for="list in item" :key="item">{{list.title}}
+             </div>
+        </transition-group>
+        <button  type="button" @click="handleClick">添加</button>
+    </div>
+    <script>
+        var count=0;
+        new Vue({
+            el:"#app",
+            data :{
+                item:[]
+            },
+            methods:{
+                handleClick:function(){
+                    this.item.push({
+                        id:count++,
+                        title:'hello,word'
+                    })
+                }
+            }
+        })
+    </script>
+</body>
+</html>

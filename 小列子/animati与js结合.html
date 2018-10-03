@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>animite</title>
+    <script src="../vue.js"></script>
+
+</head>
+<body>
+    <div id="demo">
+          <button v-on:click="show = !show">
+            Toggle
+          </button>
+           <!-- @before-enter是规定的，绑定的动画钩子,进入动画之前 --><!-- 当@before-enter这个钩子执行完之后，就执行@enter这个金子函数 -->
+           <!-- 有动画进入，也有出场动画，用法都是一样的，只要把enter改成leave就好 -->
+          <transition name="fade"
+            @before-enter="handleBeforeEnter"
+            @enter="handleEnter"
+            @after-enter="handleAfterEnter"
+          >
+             <p v-if="show">hello</p>
+          </transition>
+    </div>
+    <script>
+        new Vue({
+              el: '#demo',
+              data: {
+                show: true
+              },
+              methods:{
+                handleBeforeEnter:function(el){// el参数，指的是transiton包裹的标签，在这里面指的是p
+                  el.style.color="red"
+                },
+                handleEnter:function(el,done){// el指的也是p，done指的是一个回调函数
+                    setTimeout(()=>{
+                    el.style.color="yellow"
+                    },2000) // es6写法
+                    setTimeout(function(){
+                      done()//这个回调函数用于告诉浏览器这个钩子执行完了，可以进行其它函数了
+                    }, 4000)
+                },
+                handleAfterEnter:function(el){
+                  el.style.color="#000"
+                }
+              }
+            })
+    </script>
+</body>
+</html>

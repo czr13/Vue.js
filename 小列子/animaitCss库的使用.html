@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>animite.css库的使用</title>
+    <script src="../vue.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/animate.css">
+    <style type="text/css">
+    </style>
+</head>
+<body>
+    <div id="demo">
+          <button v-on:click="show = !show">
+            Toggle
+          </button>
+          <transition name="fade"
+                appear
+                enter-active-class="animated swing"
+                leave-active-class="animated flash"
+                appear-active-class="animated swing"
+          ><!-- 自定义类的名字 -->
+             <p v-if="show">hello</p>
+          </transition><!-- animated是使用animate.css插件必须的，swing指的是插件里面的动画 -->
+          <!-- appear的作用是解决刷新没有动画的问题 -->
+    </div>
+    <script>
+        new Vue({
+              el: '#demo',
+              data: {
+                show: true
+              }
+            })
+    </script>
+</body>
+</html>
